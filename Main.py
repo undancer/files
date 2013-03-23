@@ -14,7 +14,7 @@ def findExcelFile(path):
     _list = []
     for root, dirs, files in os.walk(path):
         clean(dirs)
-        _list += ['%s/%s' % (root, name) for name in files if
+        _list += [os.path.join(root, name) for name in files if
                   not (not endswith(name, '.xls', 'xlsx') or name.startswith('~'))]
     return _list
 
