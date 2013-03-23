@@ -49,6 +49,8 @@ def main():
     paths = findExcelFile('/share/svn')
     print(paths)
 
+    count, error = 0, 0
+
     for path in paths:
         workbook = open_workbook(path)
         for sheet in workbook.sheets():
@@ -60,8 +62,11 @@ def main():
                         try:
                             msg = '{0:s} | {1:d}:{2:d} -> {3:s}:{4:s}'.format(path, x, y, title, value)
                             print(msg)
+                            count += 1
                         except UnicodeEncodeError:
+                            error += 1
                             pass
+    print('count:%d error:%d' % (count, error))
 
 
 if __name__ == '__main__':
